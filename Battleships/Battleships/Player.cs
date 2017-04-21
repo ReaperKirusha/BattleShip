@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace Battleships
 {
     public class Ship {
-        private bool IsShipDestroyed;
-        public bool horizantal;
-        private int type;
-        private Point[] ShipsPoints;
-        private bool[] DamagedPoints;// true - стоит, false - попали
+        private bool IsShipDestroyed; // уничтожен ли корабль
+        public bool horizantal; //горизонтальный или нет
+        private int type; //количство точек корабля
+        private Point[] ShipsPoints; // точки корабля в виде поинтов
+        private bool[] DamagedPoints;// true - стоит, false - точка уничтожена
 
+        //ищет корабль с такой точкой, если не найден, возвращает null
         public Ship FindShip(Point Attack)
         {
             for (int i = 0; i < type; i++)
@@ -88,7 +89,8 @@ namespace Battleships
         bool[] DestroyedShips;// true - стоит, false - уничтожен
         int NumberOfShips;
         int NumberOfLeftShips;
-
+        
+        //ищет корабль по точку, если не нашел возвразает null, в ином случае корабль
         public Ship FindShip(Point Attack)
         {
             for (int i = 0; i < NumberOfShips; i++)
@@ -151,7 +153,13 @@ namespace Battleships
         public char GetPointInShips(Point a) {
             return Ships[a.a, a.b];
         }
-       
+
+        //назначает значение в точке
+        public void SetPointInShips(char b, Point a)
+        {
+           Ships[a.a, a.b] = b;
+        }
+
         public Ships GetShipsOfPlayer() {
             return Ships_of_player;
         }
