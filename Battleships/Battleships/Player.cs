@@ -14,6 +14,12 @@ namespace Battleships
         private Point[] ShipsPoints; // точки корабля в виде поинтов
         private bool[] DamagedPoints;// true - стоит, false - точка уничтожена
 
+        public Ship() {
+            IsShipDestroyed = false;
+            horizantal = false;
+            type = 1;
+        }
+
         //ищет корабль с такой точкой, если не найден, возвращает null
         public Ship FindShip(Point Attack)
         {
@@ -85,11 +91,25 @@ namespace Battleships
     }
 
     public class Ships {
+        int ShipToInitialize;
         Ship[] ShipsArray;
         bool[] DestroyedShips;// true - стоит, false - уничтожен
         int NumberOfShips;
         int NumberOfLeftShips;
-        
+
+        public Ships() {
+            ShipToInitialize = 0;
+            ShipsArray = new Ship[10];
+            for(int i = 0; i < 10; i++)
+            {
+                ShipsArray[i] = new Ship();
+            }
+        }
+
+        public bool SetShip(Point First, Point Second, int CertainType) {
+            return ShipsArray[ShipToInitialize].SetPoints(First, Second, CertainType);
+        }
+
         //ищет корабль по точку, если не нашел возвразает null, в ином случае корабль
         public Ship FindShip(Point Attack)
         {
@@ -143,10 +163,12 @@ namespace Battleships
         //имя игрока
         private string Name;
 
-        Player() {
+        public Player() {
             Ships = new char[10,10];
             Shots = new char[10,10];
             Name = "Player " + ReturnNumberOfPlayers(); //
+            Ships_of_player = new Ships();
+            Ships_left = 10;
         }
 
         //возвращает значене в опред точке
@@ -200,7 +222,7 @@ namespace Battleships
                 if (Enemy.GetShipsOfPlayer().SetDamage(Attack))
                 {
                     Point[] Temp = Ships_of_player.FindShip(Attack).GetPoints();
-                    bool horiantal = Ships_of_player.FindShip(Attack).horizantal;
+                    bool horizantal = Ships_of_player.FindShip(Attack).horizantal;
 
 
                     return 2;

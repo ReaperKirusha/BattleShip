@@ -18,15 +18,12 @@ namespace Battleships
 
         static void Main(string[] args)
         {
-            int[] name = { 4, 5, 6};
-            int[] gub = {1, 2, 3};
-            
-            gub = game(name);
+            Player FirstPlayer = new Player(), SecondPlayer = new Player();
 
-            Console.WriteLine(name[0]);
-            Console.WriteLine(gub[1]);
-            Console.WriteLine(gub[2]);
+            Start_of_game Start = new Start_of_game();
+            Start.InitializeField(FirstPlayer);
 
-        }
+
     }
+}
 }
